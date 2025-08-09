@@ -1,0 +1,35 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - The MoleCave{% endblock %}
+
+{% block content %}
+<div class="jumbotron bg-dark text-white text-center">
+    <h1 class="display-4">Welcome to The MoleCave</h1>
+    <p class="lead">Your modern, open-source chemical compound database.</p>
+    <hr class="my-4 bg-light">
+    <p>Explore, upload, and manage chemical data with ease.</p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('search') }}" role="button">Start Searching</a>
+    <a class="btn btn-secondary btn-lg" href="{{ url_for('upload') }}" role="button">Upload a Compound</a>
+</div>
+
+<div class="row text-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Database Statistics</h5>
+                <p class="card-text">Total compounds currently stored:</p>
+                <h2 class="font-weight-bold">{{ count }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Get Started</h5>
+                <p class="card-text">New to The MoleCave? Upload a new compound via its SMILES string or search our existing database to see what we have to offer.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
