@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}Search - The MoleCave{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3>Search Compounds</h3>
+    </div>
+    <div class="card-body">
+        <input type="text" class="form-control form-control-lg mb-3" id="searchQuery" placeholder="Search by Name, SMILES, InChIKey, or Formula...">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Formula</th>
+                        <th>Normalized SMILES</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="compoundTableBody">
+                    {# Compounds will be loaded here by JavaScript #}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchQueryInput = document.getElementById('searchQuery');
+        const compoundTableBody = document.getElementById('compoundTableBody');
+        let allCompounds = []; // To store all compounds initially fetched
+
+        // Function to fetch and display compounds
+        function fetchAndDisplayCompounds(query = '') {
+            fetch(`/search_api?query=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    compoundTableBody.innerHTML = ''; // Clear existing rows
+                    if (data.error) {
+                        console.error('Error fetching compounds:', data.error);
+                        compoundTableBody.innerHTML = `<tr><td colspan="4" class="text-center text-danger">Error loading compounds: ${data.error}</td></tr>`;
+                        return;
+                    }
+
+                    if (query === '') {
+                        allCompounds = data; // Store all compounds if no query
+                    }
+
+                    if (data.length === 0) {
+                        compoundTableBody.innerHTML = `<tr><td colspan="4" class="text-center">No compounds found.</td></tr>`;
+                        return;
+                    }
+
+                    data.forEach(compound => {
+                        const row = `
+                            <tr>
+                                <td>${compound.common_name || compound.iupac_name || 'N/A'}</td>
+                                <td>${compound.molecular_formula || 'N/A'}</td>
+                                <td><code>${compound.smiles_normalized || 'N/A'}</code></td>
+                                <td>
+                                    <a href="/compound/${compound.compound_id}" class="btn btn-sm btn-info">View</a>
+                                </td>
+                            </tr>
+                        `;
+                        compoundTableBody.innerHTML += row;
+                    });
+                })
+                .catch(error => {
+                    console.error('Network error fetching compounds:', error);
+                    compoundTableBody.innerHTML = `<tr><td colspan="4" class="text-center text-danger">Network error loading compounds.</td></tr>`;
+                });
+        }
+
+        // Initial load of all compounds
+        fetchAndDisplayCompounds();
+
+        // Real-time search functionality
+        searchQueryInput.addEventListener('input', function() {
+            const query = searchQueryInput.value.trim();
+            fetchAndDisplayCompounds(query);
+        });
+    });
+</script>
+{% endblock %}

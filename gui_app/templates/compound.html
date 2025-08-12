@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ compound.common_name or compound.iupac_name or 'Compound Details' }} - The MoleCave{% endblock %}
+
+{% block content %}
+<div class="card compound-details-card">
+    <div class="card-header">
+        <h3>{{ compound.common_name or compound.iupac_name or 'Compound Details' }}</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <!-- Left Column: 2D Structure & Identifiers -->
+            <div class="col-md-5 text-center">
+                <h4>2D Structure</h4>
+                <div class="structure-svg mb-3">
+                    {{ compound.structure_2d_svg | safe }}
+                </div>
+                
+                <div class="identifiers-section mt-4">
+                    <h5 class="mb-3">Identifiers</h5>
+                    <div class="mb-3">
+                        <label for="smiles-input" class="form-label">Normalized SMILES</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-sm" value="{{ compound.smiles_normalized }}" readonly id="smiles-input">
+                            <button class="btn btn-sm btn-outline-secondary copy-btn" type="button" data-clipboard-target="#smiles-input">Copy</button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inchi-input" class="form-label">InChI</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-sm" value="{{ compound.inchi }}" readonly id="inchi-input">
+                            <button class="btn btn-sm btn-outline-secondary copy-btn" type="button" data-clipboard-target="#inchi-input">Copy</button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inchikey-input" class="form-label">InChI Key</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-sm" value="{{ compound.inchi_key }}" readonly id="inchikey-input">
+                            <button class="btn btn-sm btn-outline-secondary copy-btn" type="button" data-clipboard-target="#inchikey-input">Copy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Properties -->
+            <div class="col-md-7">
+                <h4>Properties</h4>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td><b>IUPAC Name</b></td>
+                                <td>{{ compound.iupac_name or 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Common Name</b></td>
+                                <td>{{ compound.common_name or 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Molecular Formula</b></td>
+                                <td><code>{{ compound.molecular_formula }}</code></td>
+                            </tr>
+                            <tr>
+                                <td><b>Molecular Weight</b></td>
+                                <td>{% if compound.molecular_weight %}{{ "%.4f"|format(compound.molecular_weight) }}{% else %}N/A{% endif %}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Sources</b></td>
+                                <td>
+                                    {% if sources %}
+                                        {% for source in sources %}
+                                            <a href="{{ source.url }}" target="_blank">{{ source.db_name }}</a><br>
+                                        {% endfor %}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Clipboard.js from a CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var clipboard = new ClipboardJS('.copy-btn');
+
+        clipboard.on('success', function(e) {
+            // Provide user feedback, e.g., change button text or show a tooltip
+            var originalText = e.trigger.innerHTML;
+            e.trigger.innerHTML = 'Copied!';
+            setTimeout(function() {
+                e.trigger.innerHTML = originalText;
+            }, 2000); // Reset text after 2 seconds
+
+            e.clearSelection();
+        });
+
+        clipboard.on('error', function(e) {
+            // Optional: handle errors
+            console.error('Action:', e.action);
+            console.error('Trigger:', e.trigger);
+            alert('Failed to copy text!');
+        });
+    });
+</script>
+{% endblock %}

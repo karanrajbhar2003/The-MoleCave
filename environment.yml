@@ -1,0 +1,12 @@
+
+name: chemical-repo
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - flask
+  - pandas
+  - rdkit
+  - molvs
+  - requests
+  - sqlalchemy

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us - The MoleCave{% endblock %}
+
+{% block content %}
+<div class="card" id="about-page-card">
+    <div class="card-header">
+        <h3>About The MoleCave</h3>
+    </div>
+    <div class="card-body">
+        <p>
+            The MoleCave is an advanced chemical compound repository developed to support the scientific community with reliable, structured, and easily accessible chemical data. Designed for researchers, students, and professionals in bioinformatics, chemistry, and related disciplines, The MoleCave offers a user-friendly interface to explore and analyze a wide array of chemical compounds, complete with structural details, identifiers, and key references.
+        </p>
+        <p>
+            With a focus on accuracy and accessibility, The MoleCave bridges the gap between data science and chemical research, aiming to foster innovation and streamline discovery in academic and industrial settings alike.
+        </p>
+
+        <h4 class="mt-4 text-center">Meet the Developers</h4>
+        <div class="row justify-content-center align-items-center mb-4">
+            <div class="col-12 col-md-6 text-center">
+                <img src="{{ url_for('static', filename='Developers.jpeg') }}" alt="Developers Group Photo" class="img-fluid mb-3" style="max-width: 250px; height: auto; border: 3px solid var(--accent-color);">
+                <ul class="list-unstyled">
+                    <li><strong>Karan Mahesh Kumar Rajbhar</strong></li>
+                    <li><strong>Priyanshu Jaywant Jadhav</strong></li>
+                    <li><strong>Rohit Durgaprasad Ram</strong></li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-6">
+                <p class="text-justify">
+                    Driven by their shared passion for bioinformatics, chemistry, and software development, the team collaborated to build a platform that reflects the interdisciplinary nature of modern scientific research. Their work exemplifies a commitment to combining biological data, computational methods, and chemical insight into a cohesive and useful tool for the scientific community.
+                </p>
+            </div>
+        </div>
+
+        <h4 class="mt-4">About the Department</h4>
+        <p>
+            The Department of Bioinformatics at Guru Nanak Khalsa College is a dynamic hub for interdisciplinary education and research, blending the fields of biology, chemistry, computer science, and data analysis. With a curriculum that emphasizes both theoretical knowledge and practical application, the department prepares students for the demands of cutting-edge research and industry roles in biotechnology, drug discovery, genomics, and computational biology.
+        </p>
+        <p>
+            To learn more about the department and its academic offerings, visit: <a href="https://gnkbion.pp.ua" target="_blank">gnkbion.pp.ua</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

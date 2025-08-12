@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Upload Compound - The MoleCave{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3>Upload New Compound</h3>
+    </div>
+    <div class="card-body">
+        <p class="card-text">Enter a compound's name (like "Aspirin"), SMILES string, or InChIKey. The system will automatically fetch its data from public databases and add it to The MoleCave.</p>
+        <form action="{{ url_for('upload') }}" method="post">
+            <div class="form-group">
+                <label for="identifier"><b>Compound Identifier</b></label>
+                <input type="text" class="form-control form-control-lg" id="identifier" name="identifier" placeholder="e.g., Aspirin, CC(=O)OC1=CC=CC=C1C(=O)O, or BSYNRYMUTXBXSQ-UHFFFAOYSA-N" required>
+                <small class="form-text text-muted">This field is mandatory.</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Fetch & Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,292 @@
+/*
+ * The MoleCave - Custom Stylesheet
+ * Enhanced for a modern, creative dark theme
+ */
+
+:root {
+    --primary-dark: #1E1E2E; /* Soft dark background */
+    --secondary-dark: #27293D; /* For cards and secondary elements */
+    --accent-color: #8A2BE2; /* Deep violet for highlights */
+    --accent-hover: #6A1BB2; /* Darker violet on hover */
+    --text-light: #E0E0E0; /* Main text color */
+    --text-dark: #333333; /* For text on light backgrounds (e.g., SVG) */
+    --border-color: #44475A; /* Subtle borders */
+    --shadow-light: rgba(0, 0, 0, 0.2);
+    --shadow-medium: rgba(0, 0, 0, 0.4);
+}
+
+/* --- General Body & Typography -- */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    padding-top: 70px; /* Adjust for fixed navbar */
+    padding-bottom: 60px; /* Space for footer */
+    transition: background-color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px var(--shadow-medium); /* Subtle glow */
+}
+
+/* --- Navigation Bar -- */
+.navbar {
+    background-color: var(--secondary-dark) !important; /* Deeper black for navbar */
+    box-shadow: 0 2px 10px var(--shadow-medium);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--accent-color) !important; /* Brand color */
+    transition: color 0.2s ease;
+}
+
+.navbar-brand:hover {
+    color: var(--accent-hover) !important;
+}
+
+.nav-link {
+    color: var(--text-light) !important;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent-color) !important;
+}
+
+/* --- Main Content & Cards -- */
+.container {
+    max-width: 1400px; /* Increased width for container */
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.card {
+    background-color: var(--secondary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 12px; /* More rounded corners */
+    margin-bottom: 25px; /* More space between cards */
+    box-shadow: 0 4px 15px var(--shadow-light); /* Lifted effect */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px); /* Subtle lift on hover */
+    box-shadow: 0 6px 20px var(--shadow-medium);
+}
+
+.card-header {
+    background-color: var(--border-color);
+    color: #ffffff;
+    font-weight: bold;
+    border-bottom: 1px solid var(--border-color);
+    border-top-left-radius: 11px; /* Match card border-radius */
+    border-top-right-radius: 11px;
+}
+
+.card-body {
+    color: var(--text-light);
+}
+
+/* --- Forms & Buttons -- */
+.form-control {
+    background-color: #333A4B; /* Slightly different dark for input */
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus {
+    background-color: #3D4458;
+    color: var(--text-light);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.2rem rgba(138, 43, 226, 0.25); /* Accent glow */
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+/* --- Tables -- */
+.table-responsive {
+    overflow-x: auto; /* Enable horizontal scrolling if content overflows */
+}
+
+.table {
+    width: 100%; /* Ensure table takes full width of its container */
+    background-color: var(--secondary-dark);
+    color: var(--text-light);
+    border-radius: 12px;
+    /* overflow: hidden; Removed to allow table-responsive to handle scrolling */
+}
+
+.table thead th {
+    border-bottom: 2px solid var(--border-color);
+    color: #ffffff;
+    background-color: #333A4B;
+}
+
+.table tbody tr {
+    border-top: 1px solid var(--border-color);
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #38384D;
+}
+
+/* Adjust column widths for better display */
+.table th:nth-child(1), .table td:nth-child(1) { /* Name */
+    width: 25%;
+}
+
+.table th:nth-child(2), .table td:nth-child(2) { /* Formula */
+    width: 15%;
+}
+
+.table th:nth-child(3), .table td:nth-child(3) { /* Normalized SMILES */
+    width: 45%;
+    word-break: break-all; /* Break long SMILES strings */
+}
+
+.table th:nth-child(4), .table td:nth-child(4) { /* Action */
+    width: 15%;
+}
+
+/* --- Compound Details & SVG -- */
+.compound-details-card {
+    margin-top: 30px;
+}
+
+.structure-svg {
+    background-color: #ffffff; /* White background for clarity */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 2px 10px var(--shadow-light);
+}
+
+.clickable {
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.clickable:hover {
+    color: var(--accent-color);
+}
+
+.clickable.copied {
+    color: var(--accent-hover);
+}
+
+.nav-tabs .nav-link {
+    background-color: var(--secondary-dark);
+    border-color: var(--border-color);
+    color: var(--text-light);
+}
+
+.nav-tabs .nav-link.active {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #ffffff;
+}
+
+.tab-content {
+    border: 1px solid var(--border-color);
+    border-top: none;
+    padding: 20px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.identifers-section {
+    text-align: left;
+}
+
+.identifier-item .form-label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.identifier-item .input-group {
+    flex-grow: 1;
+}
+
+.identifiers-section .form-control {
+    background-color: #333A4B !important;
+    color: var(--text-light) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.footer {
+    background-color: var(--secondary-dark) !important; /* Match navbar */
+    box-shadow: 0 -2px 10px var(--shadow-medium);
+    padding: 15px 0;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.footer p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* --- Alerts (Flash Messages) --- */
+.alert {
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+.alert-success {
+    background-color: #28a745; /* Green */
+    border-color: #28a745;
+    color: #ffffff;
+}
+
+.alert-info {
+    background-color: #17a2b8; /* Blue-ish */
+    border-color: #17a2b8;
+    color: #ffffff;
+}
+
+.alert-warning {
+    background-color: #ffc107; /* Yellow */
+    border-color: #ffc107;
+    color: #333333;
+}
+
+.alert-danger {
+    background-.color: #dc3545; /* Red */
+    border-color: #dc3545;
+    color: #ffffff;
+}
+
+.alert .close {
+    color: #ffffff;
+    text-shadow: none;
+}
+
+/* About Us Section Specific Styles */
+#about-page-card p {
+    font-size: 1.05em; /* Slightly increase font size */
+}
